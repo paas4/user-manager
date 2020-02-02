@@ -1,0 +1,52 @@
+
+inBalance:
+    - balance
+    - status
+
+getProxyers:
+    - balance
+    - status
+
+getMyProxyers:
+    - uid
+    - boss
+    - nickname
+    - realname
+    - status
+
+getAllProxyers:
+    - uid
+    - realname
+    - tel
+    - status
+    - wechatid
+
+getBindingProxyer:
+    - uid
+    - tel
+    - boss
+    - proxy
+    - status
+    - realname
+    - wechatid
+
+getUser:
+    - uid
+    - tel
+    - boss
+    - realname
+    - wechatid
+    - proxy
+    - is_admin
+    - status
+
+getBalance:
+    - uid
+    - total
+    - balance
+
+getBills:
+    - uid
+    - num
+    - status
+    - created_at
