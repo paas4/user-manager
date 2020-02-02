@@ -11,7 +11,9 @@ const result = require('./result')
 const clientIp = require('./clientIp')
 // JWT配置文件
 const api = require('../config/api')
-
+const jwt = require('koa-jwt')
+const jwtError = require('./jwtError')
+const jwtRefreshToken = require('./jwtRefreshToken')
 
 module.exports = (app) => {
     app.use(cors())

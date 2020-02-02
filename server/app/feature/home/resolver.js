@@ -1,3 +1,5 @@
+const Auth = require(':controller/auth')
+const ShareError = require('~/lib/shareError')
 const Resolver = require('~/class/resolver')
 
 class HomeResolver extends Resolver {
@@ -6,17 +8,21 @@ class HomeResolver extends Resolver {
         return query
     }
 
-    login(code) {
-        if (!code) {
-            return {
-                code: 402001,
-                message: '登录失败，缺少code'
-            }
+    login({ username, password}) {
+        if (!username || !password) {
+            throw new ShareError(403403, '用户名或密码错误')
         }
-        return {
-            code: 0,
-            message: 'ok'
+        return Auth.login({ username, password })
+    }
+
+    register({ username, password }) {
+        if (!username) {
+            throw new ShareError(403403, '非法用户名')
         }
+        if (!password) {
+            throw new ShareError(403403, '空密码')
+        }
+        return Auth.register({ username, password })
     }
 }
 

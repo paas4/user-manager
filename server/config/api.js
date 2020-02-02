@@ -3,10 +3,12 @@
 // 白名单
 // 不需要Token
 const public = [
+    /^\/$/,
     /^\/log/,
-    /^\/check/,
-    /^\/login/,
-    /^\/g\/refreshToken/,
+    /^\/check$/,
+    /^\/login$/,
+    /^\/register$/,
+    /^\/g\/refreshToken$/,
 
     // Qrcode
     /^\/user\/qrcode/,

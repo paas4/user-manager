@@ -12,7 +12,13 @@ append(router, resolver, {
         return ctx.query
     },
 
-    get_login(ctx) {
-        return ctx.query.code
-    }
+    // 登录
+    post_login(ctx) {
+        return ctx.request.body
+    },
+
+    // 注册
+    post_register(ctx) {
+        return ctx.request.body
+    },
 })
