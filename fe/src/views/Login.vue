@@ -7,18 +7,49 @@
 />
 </template>
 <script>
+import auth from '@/base/auth'
 import LoginRegister from '../components/LoginRegister'
 
 export default {
     components: { LoginRegister },
 
+    created() {
+        // if (auth.isLogin()) {
+        //     this.$router.replace('/user')
+        // }
+    },
+
     methods: {
         loginSubmit() {
-            console.log('Login:', this.$refs.loginRegister.login)
+            auth.login(this.$refs.loginRegister.login)
+                .then(res => {
+                    if (res.code === 0) {
+                        return this.gotoUser()
+                    }
+                    alert(res.message)
+                })
+                .catch(err => {
+                    console.log(err)
+                    alert(err.message)
+                })
         },
 
         registerSubmit() {
-            console.log('Register:', this.$refs.loginRegister.register)
+            auth.register(this.$refs.loginRegister.register)
+                .then(res => {
+                    if (res.code === 0) {
+                        return this.gotoUser()
+                    }
+                    alert(res.message)
+                })
+                .catch(err => {
+                    console.log(err)
+                    alert(err.message)
+                })
+        },
+
+        gotoUser() {
+            this.$router.push('/user')
         }
     },
 

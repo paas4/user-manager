@@ -8,7 +8,7 @@
                 <input class="input" v-model="login.username" type="text" placeholder="用户名">
             </div>
             <div class="form-item">
-                <input class="input" v-model="login.password" type="password" placeholder="密码">
+                <input class="input" v-model="login.password" type="password" placeholder="密码" autocomplete>
             </div>
             <div class="btn-group">
                 <button class="btn" @click="loginSubmit">立即登录</button>
@@ -20,7 +20,7 @@
                 <input class="input" v-model="register.username" type="text" placeholder="用户名">
             </div>
             <div class="form-item">
-                <input class="input" v-model="register.password" type="password" placeholder="密码">
+                <input class="input" v-model="register.password" type="password" placeholder="密码" autocomplete>
             </div>
             <div class="form-item">
                 <input class="input" v-model="register.email" type="text" placeholder="email">
@@ -102,6 +102,7 @@ export default {
 }
 
 .form {
+    display: block;
     flex: 1;
     padding-top: 120px;
     background: #284B9F;

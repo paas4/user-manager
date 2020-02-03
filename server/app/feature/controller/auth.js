@@ -20,7 +20,7 @@ class Auth {
         assert.ok(!user, 403100, '用户已存在')
 
         // 注册用户
-        user = User.create({ username, password: md5(password) })
+        user = await User.create({ username, password: md5(password) })
         return this.token(user)
     }
 
