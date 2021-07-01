@@ -55,14 +55,14 @@ class Auth {
             if (err.message === 'jwt expired') {
                 throw new ShareError({
                     code: 401405,
-                    message: 'Authentication Error',
+                    message: 'JWT expired',
                     stack: err.stack
                 })
             }
             if (err.message === 'invalid signature') {
                 throw new ShareError({
                     code: 401406,
-                    message: 'Authentication Error',
+                    message: 'Invalid token',
                     stack: err.stack
                 })
             }
