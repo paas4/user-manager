@@ -1,5 +1,5 @@
 const AppEnv = require('../common/appEnv')
-const gd = require('../lib/ghostdebug')
+const asp = require('@4a/asp')
 
 module.exports = () => {
     return async (ctx, next) => {
@@ -25,10 +25,10 @@ module.exports = () => {
             try {
                 ctx.send(0, 'ok', await callback(ctx))
             } catch (err) {
-                gd.error('req.requestId:', ctx.req.requestId, ctx.req.url)
-                gd.error('req.query:', ctx.query)
-                gd.error('req.body:', ctx.request.body)
-                gd.error(err)
+                asp.error('req.requestId:', ctx.req.requestId, ctx.req.url)
+                asp.error('req.query:', ctx.query)
+                asp.error('req.body:', ctx.request.body)
+                asp.error(err)
 
                 const context = err.context
                 const result = {
