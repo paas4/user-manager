@@ -14,13 +14,13 @@ class Auth {
         return this.token(user)
     }
 
-    async register({ username, password}) {
+    async register({ username, password, name, stuid }) {
         let user = await User.findOne({ username })
 
         assert.ok(!user, 403100, '用户已存在')
 
         // 注册用户
-        user = await User.create({ username, password: md5(password) })
+        user = await User.create({ username, password: md5(password), name, stuid })
         return this.token(user)
     }
 
@@ -33,13 +33,14 @@ class Auth {
 
     token(user) {
         return {
-            uid: user.uid,
-            token: jwt.sign({ uid: user.uid }, api.secret, {
+            id: user.id,
+            admin: user.admin,
+            token: jwt.sign({ id: user.id }, api.secret, {
                 expiresIn: api.timeout
             }),
-            refresh_token: jwt.sign({ uid: user.uid, grant_type: 'refresh' }, api.secret, {
-                expiresIn: api.refreshTimeout
-            })
+            // refresh_token: jwt.sign({ uid: user.uid, grant_type: 'refresh' }, api.secret, {
+            //     expiresIn: api.refreshTimeout
+            // })
         }
     }
 

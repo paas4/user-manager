@@ -37,8 +37,8 @@ module.exports = (router, resolver, map) => {
         const params = map[key]
         const { dot, uri, method, permission } = decipher(key)
         const permissioner = role(permission)
-        router[dot](uri, permissioner(), factory(ctx => {
-            return resolver[method](params(ctx))
+        router[dot](uri, permissioner(), factory((ctx, next) => {
+            return resolver[method](params(ctx, next), next)
         }))
     })
 }

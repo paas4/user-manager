@@ -4,7 +4,7 @@ const mysql = {
     dev: {
         username: 'root',
         password: 'Lincoapp@2018',
-        database: 'user_auth_template',
+        database: 'user',
         host: 'localhost',
         port: 3306,
         dialect: 'mysql',
@@ -13,7 +13,16 @@ const mysql = {
     },
     test: {},
     preview: {},
-    production: {},
+    production: {
+        username: 'root',
+        password: 'Lincoapp@2018',
+        database: 'user',
+        host: 'localhost',
+        port: 3306,
+        dialect: 'mysql',
+        logging: false,
+        timezone: '+08:00',
+    },
 }
 
 const redis = {

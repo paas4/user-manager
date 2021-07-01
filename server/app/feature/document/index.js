@@ -3,7 +3,7 @@ const resolver = require('./resolver')
 const router = module.exports = require('koa-router')()
 const assert = require('~/lib/assert')
 
-router.prefix('/users')
+router.prefix('/documents')
 
 append(router, resolver, {
 
@@ -13,6 +13,11 @@ append(router, resolver, {
             page: Number(ctx.query.page) || 1,
             size: Number(ctx.query.size) || 10,
         }
+    },
+
+    // 新增
+    post_ROOT_create(ctx) {
+        return ctx
     },
 
     // 单个查询

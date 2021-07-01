@@ -7,9 +7,10 @@ class User extends SequelizeApp {
         super({ Master: db.users })
     }
 
-    create({ username, password }) {
+    create({ name, stuid, username, password }) {
         return super.create({
-            uid: sid.generate(),
+            name,
+            stuid,
             username,
             password,
         })

@@ -1,6 +1,6 @@
 function factory(callback) {
-    return async function(ctx) {
-        await ctx.try(() => callback(ctx))
+    return async function(ctx, next) {
+        await ctx.try(() => callback(ctx, next))
     }
 }
 

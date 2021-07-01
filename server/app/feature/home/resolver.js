@@ -15,14 +15,14 @@ class HomeResolver extends Resolver {
         return Auth.login({ username, password })
     }
 
-    register({ username, password }) {
+    register({ username, password, name, stuid }) {
         if (!username) {
             throw new ShareError(403403, '非法用户名')
         }
         if (!password) {
             throw new ShareError(403403, '空密码')
         }
-        return Auth.register({ username, password })
+        return Auth.register({ username, password, name, stuid })
     }
 }
 
