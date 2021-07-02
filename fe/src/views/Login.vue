@@ -4,6 +4,8 @@
     :status="status"
     :loginSubmit="loginSubmit"
     :registerSubmit="registerSubmit"
+    :loginMessage="loginMessage"
+    :registerMessage="registerMessage"
 />
 </template>
 <script>
@@ -12,6 +14,13 @@ import LoginRegister from '../components/LoginRegister'
 
 export default {
     components: { LoginRegister },
+
+    data() {
+        return {
+            loginMessage: null,
+            registerMessage: null,
+        }
+    },
 
     created() {
         // if (auth.isLogin()) {
@@ -26,30 +35,53 @@ export default {
                     if (res.code === 0) {
                         return this.gotoUser()
                     }
-                    alert(res.message)
+                    this.loginMessage = res.message
                 })
                 .catch(err => {
                     console.log(err)
-                    alert(err.message)
+                    this.loginMessage = err.message
                 })
         },
 
         registerSubmit() {
+            const data = this.$refs.loginRegister.register
+
+            if (!data.username) {
+                return this.registerMessage = '请输入用户名'
+            }
+
+            if (!data.password) {
+                return this.registerMessage = '请输入密码'
+            }
+
+            if (data.password !== data.repeatPassword) {
+                return this.registerMessage = '两次密码输入不一致'
+            }
+
+            if (!data.stuid) {
+                return this.registerMessage = '请输入学号'
+            }
+
+            if (!data.name) {
+                return this.registerMessage = '请输入姓名'
+            }
+
             auth.register(this.$refs.loginRegister.register)
                 .then(res => {
                     if (res.code === 0) {
                         return this.gotoUser()
                     }
-                    alert(res.message)
+                    this.registerMessage = res.message
                 })
                 .catch(err => {
                     console.log(err)
-                    alert(err.message)
+                    this.registerMessage = err.message
                 })
         },
 
         gotoUser() {
-            this.$router.push('/user')
+            // this.$router.push('/user')
+            location.href = 'http://localhost/demo/'
         }
     },
 

@@ -1,7 +1,7 @@
 module.exports = {
     lintOnSave: false,
     devServer: {
-        host: 'dev.wsd.ink',
+        host: '192.168.1.100',
         disableHostCheck: true,
     }
 }

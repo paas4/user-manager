@@ -10,8 +10,14 @@
             <div class="form-item">
                 <input class="input" v-model="login.password" type="password" placeholder="密码" autocomplete>
             </div>
+            <div class="form-item">
+                <div class="tips">{{loginMessage}}</div>
+            </div>
             <div class="btn-group">
                 <button class="btn" @click="loginSubmit">立即登录</button>
+            </div>
+            <div class="link">
+                <router-link to="/register">注册</router-link>
             </div>
         </div>
         <div class="form" v-if="status == 1">
@@ -20,13 +26,25 @@
                 <input class="input" v-model="register.username" type="text" placeholder="用户名">
             </div>
             <div class="form-item">
-                <input class="input" v-model="register.password" type="password" placeholder="密码" autocomplete>
+                <input class="input" v-model="register.password" type="password" placeholder="请输入密码" autocomplete>
             </div>
             <div class="form-item">
-                <input class="input" v-model="register.email" type="text" placeholder="email">
+                <input class="input" v-model="register.repeatPassword" type="password" placeholder="请确认密码" autocomplete>
+            </div>
+            <div class="form-item">
+                <input class="input" v-model="register.stuid" type="text" placeholder="请输入学号">
+            </div>
+            <div class="form-item">
+                <input class="input" v-model="register.name" type="text" placeholder="请输入姓名">
+            </div>
+            <div class="form-item">
+                <div class="tips">{{registerMessage}}</div>
             </div>
             <div class="btn-group">
                 <button class="btn" @click="registerSubmit">立即注册</button>
+            </div>
+            <div class="link">
+                <router-link to="/login">登录</router-link>
             </div>
         </div>
     </div>
@@ -47,6 +65,8 @@ export default {
             type: Function,
             default: () => {}
         },
+        loginMessage: String,
+        registerMessage: String,
     },
 
     data() {
@@ -58,7 +78,9 @@ export default {
             register: {
                 username: null,
                 password: null,
-                email: null,
+                repeatPassword: null,
+                stuid: null,
+                name: null
             }
         }
     }
@@ -96,19 +118,21 @@ export default {
 .cover {
     width: 600px;
     height: 100%;
-    background: white url(../assets/cover.jpg) no-repeat;
-    background-position: center;
-    background-size: 80% auto;
+    background: white url(../assets/bg.jpg) no-repeat;
+    background-position: left center;
+    background-size: cover;
 }
 
 .form {
     display: block;
     flex: 1;
+    padding: 20px;
     padding-top: 120px;
     background: #284B9F;
 }
 
 .form-item {
+    width: 100%;
     margin-bottom: 12px;
 }
 
@@ -119,18 +143,19 @@ export default {
 
 .btn,
 .input {
-    width: 180px;
+    width: 100%;
     padding: 8px 12px;
     border-radius: 2px;
     border: none;
     outline: none;
+    box-sizing: border-box;
 }
 
 .btn {
     color: white;
     cursor: pointer;
     font-size: 13px;
-    box-sizing: content-box;
+    box-sizing: border-box;
     background: #2f59bf;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.13);
 }
@@ -141,6 +166,21 @@ export default {
 }
 
 .btn-group {
-    padding: 20px 0
+    padding: 12px 0 20px
+}
+
+.link {
+    text-align: right;
+}
+
+.link a {
+    color: white;
+    font-size: 12px;
+}
+
+.tips {
+    color: red;
+    text-align: right;
+    font-size: 13px;
 }
 </style>
