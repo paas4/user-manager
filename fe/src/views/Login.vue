@@ -27,9 +27,18 @@ export default {
         // if (auth.isLogin()) {
         //     this.$router.replace('/user')
         // }
+
+        this.ticketLogin()
     },
 
     methods: {
+
+        ticketLogin() {
+            if (this.$route.query.ticket) {
+                this.gotoUser()
+            }
+        },
+
         loginSubmit() {
             auth.login(this.$refs.loginRegister.login)
                 .then(res => {

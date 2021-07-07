@@ -1,5 +1,7 @@
 import appEnv from '@/base/env'
 
+console.log(`env: ${appEnv.env}`)
+
 // Server
 export const baseURL = appEnv.get({
     dev: 'http://192.168.1.100:9002',
