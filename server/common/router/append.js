@@ -38,6 +38,7 @@ module.exports = (router, resolver, map) => {
         const { dot, uri, method, permission } = decipher(key)
         const permissioner = role(permission)
         router[dot](uri, permissioner(), factory((ctx, next) => {
+            ctx.set("Access-Control-Allow-Origin","*")
             return resolver[method](params(ctx, next), next)
         }))
     })

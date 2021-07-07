@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@4a/env@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.nlark.com/@4a/env/download/@4a/env-3.0.0.tgz#e263669a16c435e67a57aa57f3c677c1f5361208"
+  integrity sha1-4mNmmhbENeZ6V6pX88Z3wfU2Egg=
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.14.5":
   version "7.14.5"
   resolved "https://registry.nlark.com/@babel/code-frame/download/@babel/code-frame-7.14.5.tgz#23b08d740e83f49c5e59945fbf1b43e80bbf4edb"

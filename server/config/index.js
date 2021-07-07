@@ -1,17 +1,16 @@
 const AppEnv = require('../common/appEnv')
 
 const port = {
-    dev: 3000,
-    production: 9000,
-    default: 3000,
+    dev: 9002,
+    production: 9002,
 }
 
 const server = {
-    dev: 'http://127.0.0.1:3000',
-    production: 'http://127.0.0.1:9000',
+    dev: 'http://127.0.0.1:9002',
+    production: 'http://127.0.0.1:9002',
 }
 
 module.exports = {
-    port: port[AppEnv.nodeEnv] || port.default,
+    port: port[AppEnv.nodeEnv] || port.dev,
     server: server[AppEnv.nodeEnv]
 }

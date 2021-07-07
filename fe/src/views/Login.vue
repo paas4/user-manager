@@ -11,6 +11,7 @@
 <script>
 import auth from '@/base/auth'
 import LoginRegister from '../components/LoginRegister'
+import { baseURL } from '../config/host'
 
 export default {
     components: { LoginRegister },
@@ -80,8 +81,7 @@ export default {
         },
 
         gotoUser() {
-            // this.$router.push('/user')
-            location.href = 'http://localhost/demo/'
+            location.href = `${baseURL}/lab.html`
         }
     },
 
