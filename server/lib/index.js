@@ -36,6 +36,11 @@ class Lib {
         return toFixed(min + (max - min) * Math.random(), length)
     }
 
+    // 标准时间格式化
+    dateFormat(date) {
+        return moment(new Date(date)).format('YYYY-MM-DD HH:mm:ss')
+    }
+
     /**
      * 明天 0:00:00 过期时间 适用于当天过期取值
      */

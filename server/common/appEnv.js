@@ -1,5 +1,9 @@
 class AppEnv {
 
+    static get env() {
+        return process.env.NODE_ENV || 'dev'
+    }
+
     static get nodeEnv() {
         return process.env.NODE_ENV || 'dev'
     }

@@ -16,7 +16,7 @@ const account = appEnv.get({
     }
 })
 
-console.log(123, baseURL, account)
+// console.log(123, baseURL, account)
 
 module.exports = {
     baseURL,

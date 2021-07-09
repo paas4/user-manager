@@ -15,12 +15,13 @@ class Lab {
     }
 
     // http://www.ilab-x.com/open/api/v2/data_upload?access_token=ACCESS_TOKEN
-    async dataUpload(token) {
+    async dataUpload(token, data) {
         return axios({
             baseURL,
             method: 'POST',
             url: '/open/api/v2/data_upload',
             params: { access_token: token },
+            data,
         })
     }
 
