@@ -8,13 +8,13 @@
                 <input class="input" v-model="login.username" type="text" placeholder="用户名">
             </div>
             <div class="form-item">
-                <input class="input" v-model="login.password" type="password" placeholder="密码" autocomplete>
+                <input class="input" v-model="login.password" type="text" placeholder="密码" autocomplete>
             </div>
             <div class="form-item">
-                <div class="tips">{{loginMessage}}</div>
+                <div class="tips">{{loginMessage.message}}</div>
             </div>
             <div class="btn-group">
-                <button class="btn" @click="loginSubmit">立即登录</button>
+                <button class="btn" @click="loginSubmit(login, loginMessage)">立即登录</button>
             </div>
             <div class="link">
                 <router-link to="/register">注册</router-link>
@@ -38,10 +38,10 @@
                 <input class="input" v-model="register.name" type="text" placeholder="请输入姓名">
             </div>
             <div class="form-item">
-                <div class="tips">{{registerMessage}}</div>
+                <div class="tips">{{registerMessage.message}}</div>
             </div>
             <div class="btn-group">
-                <button class="btn" @click="registerSubmit">立即注册</button>
+                <button class="btn" @click="registerSubmit(register, registerMessage)">立即注册</button>
             </div>
             <div class="link">
                 <router-link to="/login">登录</router-link>
@@ -50,8 +50,11 @@
     </div>
 </div>
 </template>
-<script>
-export default {
+<script lang="ts">
+import { ref, defineComponent, reactive, watch, watchEffect } from 'vue'
+
+export default defineComponent({
+
     props: {
         status: {
             type: Number,
@@ -59,32 +62,40 @@ export default {
         },
         loginSubmit: {
             type: Function,
-            default: () => {}
+            required: true,
         },
         registerSubmit: {
             type: Function,
-            default: () => {}
+            required: true,
         },
         loginMessage: String,
         registerMessage: String,
     },
 
-    data() {
+    setup() {
+        const loginData: LoginData = {
+            username: '',
+            password: ''
+        }
+        const registerData: RegisterData = {
+            name: '',
+            stuid: '',
+            username: '',
+            password: '',
+            repeatPassword: '',
+        }
+
+        const loginMessage: Message = { message: '' }
+        const registerMessage: Message = { message: '' }
+
         return {
-            login: {
-                username: null,
-                password: null,
-            },
-            register: {
-                username: null,
-                password: null,
-                repeatPassword: null,
-                stuid: null,
-                name: null
-            }
+            login: reactive(loginData),
+            register: reactive(registerData),
+            loginMessage: reactive(loginMessage),
+            registerMessage: reactive(registerMessage),
         }
     }
-}
+})
 </script>
 <style scoped>
 .login-wrapper {

@@ -1,5 +1,5 @@
 import store from 'store2'
-import Http from '@gavinning/http'
+import Http from '@4a/http'
 import api from '@/config/api'
 import { baseURL } from '@/config/host'
 
@@ -13,7 +13,7 @@ export default new Http({
     // @err 错误，没有则为null
     // @options 请求参数
     // @http 当前http实例
-    async resolver(err, response, options, http) {
+    async resolver(err: Error, response: any, options: any) {
         if (err) {
             console.log('系统异常[id]:' + err.message)
         }
@@ -21,5 +21,5 @@ export default new Http({
             console.log('请求异常[id]:' + response.data.message)
         }
         return response.data
-    }
+    },
 })

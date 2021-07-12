@@ -1,6 +1,6 @@
 const api = {
 
-    login(data) {
+    login(data: any) {
         return {
             url: '/login',
             data,
@@ -8,7 +8,7 @@ const api = {
         }
     },
 
-    register(data) {
+    register(data: any) {
         return {
             url: '/register',
             data,
