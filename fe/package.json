@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@4a/assert": "^0.1.1",
     "@4a/env": "^3.0.0",
     "@4a/http": "^0.3.1",
     "store2": "^2.12.0",

@@ -5,15 +5,5 @@ router-view
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-export default defineComponent({
-    name: 'Name',
-
-    setup() {
-
-    },
-})
+export default defineComponent({ name: 'App' })
 </script>
-
-<style lang="stylus" scoped>
-
-</style>

@@ -1,57 +1,42 @@
-<template>
-<div class="login-wrapper">
-    <div class="login">
-        <div class="cover"></div>
-        <div class="form" v-if="status == 0">
-            <div class="label">登录</div>
-            <div class="form-item">
-                <input class="input" v-model="login.username" type="text" placeholder="用户名">
-            </div>
-            <div class="form-item">
-                <input class="input" v-model="login.password" type="text" placeholder="密码" autocomplete>
-            </div>
-            <div class="form-item">
-                <div class="tips">{{loginMessage.message}}</div>
-            </div>
-            <div class="btn-group">
-                <button class="btn" @click="loginSubmit(login, loginMessage)">立即登录</button>
-            </div>
-            <div class="link">
-                <router-link to="/register">注册</router-link>
-            </div>
-        </div>
-        <div class="form" v-if="status == 1">
-            <div class="label">注册</div>
-            <div class="form-item">
-                <input class="input" v-model="register.username" type="text" placeholder="用户名">
-            </div>
-            <div class="form-item">
-                <input class="input" v-model="register.password" type="password" placeholder="请输入密码" autocomplete>
-            </div>
-            <div class="form-item">
-                <input class="input" v-model="register.repeatPassword" type="password" placeholder="请确认密码" autocomplete>
-            </div>
-            <div class="form-item">
-                <input class="input" v-model="register.stuid" type="text" placeholder="请输入学号">
-            </div>
-            <div class="form-item">
-                <input class="input" v-model="register.name" type="text" placeholder="请输入姓名">
-            </div>
-            <div class="form-item">
-                <div class="tips">{{registerMessage.message}}</div>
-            </div>
-            <div class="btn-group">
-                <button class="btn" @click="registerSubmit(register, registerMessage)">立即注册</button>
-            </div>
-            <div class="link">
-                <router-link to="/login">登录</router-link>
-            </div>
-        </div>
-    </div>
-</div>
+<template lang="pug">
+.login-wrapper
+    .login
+        .cover
+        .form(v-if="status == 0")
+            .label 登录
+            .form-item
+                input.input(v-model="login.username", type="text", placeholder="用户名")
+            .form-item
+                input.input(v-model="login.password", type="password", placeholder="密码", autocomplete)
+            .form-item
+                .tips {{loginMessage.message}}
+            .btn-group
+                button.btn(@click="loginSubmit") 立即登录
+            .link
+                router-link(to="/register") 注册
+        .form(v-if="status == 1")
+            .label 注册
+            .form-item
+                input.input(v-model="register.username", type="text", placeholder="用户名")
+            .form-item
+                input.input(v-model="register.password", type="password", placeholder="请输入密码", autocomplete)
+            .form-item
+                input.input(v-model="register.repeatPassword", type="password", placeholder="请确认密码", autocomplete)
+            .form-item
+                input.input(v-model="register.stuid", type="text", placeholder="请输入学号")
+            .form-item
+                input.input(v-model="register.name", type="text", placeholder="请输入姓名")
+            .form-item
+                .tips {{registerMessage.message}}
+            .btn-group
+                button.btn(@click="registerSubmit") 立即注册
+            .link
+                router-link(to="/login") 登录
 </template>
 <script lang="ts">
-import { ref, defineComponent, reactive, watch, watchEffect } from 'vue'
+import auth from '@/common/auth'
+import { Login, Register } from '@/class/auth'
+import { PropType, defineComponent, reactive } from 'vue'
 
 export default defineComponent({
 
@@ -60,39 +45,45 @@ export default defineComponent({
             type: Number,
             default: 0
         },
-        loginSubmit: {
-            type: Function,
-            required: true,
+        afterLogin: {
+            type: Function as PropType<() => any>,
+            default: () => {}
         },
-        registerSubmit: {
-            type: Function,
-            required: true,
+        afterRegister: {
+            type: Function as PropType<() => void>,
+            default: () => {}
         },
-        loginMessage: String,
-        registerMessage: String,
     },
 
     setup() {
-        const loginData: LoginData = {
-            username: '',
-            password: ''
-        }
-        const registerData: RegisterData = {
-            name: '',
-            stuid: '',
-            username: '',
-            password: '',
-            repeatPassword: '',
-        }
-
-        const loginMessage: Message = { message: '' }
-        const registerMessage: Message = { message: '' }
+        const login: Auth.Login = reactive(Login.empty())
+        const register: Auth.Register = reactive(Register.empty())
+        const loginMessage: Message = reactive({ message: null })
+        const registerMessage: Message = reactive({ message: null })
 
         return {
-            login: reactive(loginData),
-            register: reactive(registerData),
-            loginMessage: reactive(loginMessage),
-            registerMessage: reactive(registerMessage),
+            login,
+            register,
+            loginMessage,
+            registerMessage,
+        }
+    },
+
+    methods: {
+        loginSubmit() {
+            auth.login(this.login)
+                .then(this.afterLogin)
+                .catch((err: Error) => {
+                    this.loginMessage.message = err.message
+                })
+        },
+
+        registerSubmit() {
+            auth.register(this.register)
+                .then(this.afterRegister)
+                .catch((err: Error) => {
+                    this.registerMessage.message = err.message
+                })
         }
     }
 })

@@ -2,8 +2,8 @@ import store from 'store2'
 import http from '@/base/http'
 
 class Auth {
-    login(user: LoginData) {
-        return http.login(user).then((res: any) => {
+    login(user: Auth.Login) {
+        return http.login(user).then((res: Response) => {
             if (res.code === 0) {
                 store.set('uid', res.data.uid)
                 store.set('token', res.data.token)
@@ -13,8 +13,8 @@ class Auth {
         })
     }
 
-    register(user: RegisterData) {
-        return http.register(user).then((res: any) => {
+    register(user: Auth.Register) {
+        return http.register(user).then((res: Response) => {
             if (res.code === 0) {
                 store.set('uid', res.data.uid)
                 store.set('token', res.data.token)
