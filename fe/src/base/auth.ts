@@ -7,7 +7,6 @@ class Auth {
             if (res.code === 0) {
                 store.set('uid', res.data.uid)
                 store.set('token', res.data.token)
-                store.set('refresh_token', res.data.refresh_token)
             }
             return res
         })
@@ -18,7 +17,17 @@ class Auth {
             if (res.code === 0) {
                 store.set('uid', res.data.uid)
                 store.set('token', res.data.token)
-                store.set('refresh_token', res.data.refresh_token)
+            }
+            return res
+        })
+    }
+
+    remoteLogin(ticket: string) {
+        return http.remoteLogin({ ticket }).then((res: Response) => {
+            if (res.code === 0) {
+                store.set('un', res.data.un)
+                store.set('uid', res.data.uid)
+                store.set('token', res.data.token)
             }
             return res
         })

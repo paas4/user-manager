@@ -56,8 +56,8 @@ export default defineComponent({
     },
 
     setup() {
-        const login: Auth.Login = reactive(Login.empty())
-        const register: Auth.Register = reactive(Register.empty())
+        const login = reactive(Login.empty())
+        const register = reactive(Register.empty())
         const loginMessage: Message = reactive({ message: null })
         const registerMessage: Message = reactive({ message: null })
 

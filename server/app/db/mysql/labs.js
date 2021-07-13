@@ -1,22 +1,24 @@
 module.exports = (db, DataTypes) => {
-    return db.define('users', {
+    return db.define('labs', {
         id: {
             type: DataTypes.INTEGER(10),
             primaryKey: true,
             autoIncrement: true,
         },
-        un: DataTypes.STRING(32),
-        name: DataTypes.STRING(32),
-        stuid: DataTypes.STRING(32),
-        username: DataTypes.STRING(32),
-        password: DataTypes.STRING(64),
-        admin: {
-            type: DataTypes.INTEGER(2),
-            defaultValue: 0
-        },
+        uid: DataTypes.INTEGER(10),
+
+        sid: DataTypes.STRING(32),
+        title: DataTypes.STRING(32),
+        score: DataTypes.INTEGER(10),
+
+        startTime: DataTypes.STRING(16),
+        endTime: DataTypes.STRING(16),
+
+        description: DataTypes.STRING(255),
+        report: DataTypes.TEXT,
         status: {
             type: DataTypes.INTEGER(2),
-            defaultValue: 0
+            defaultValue: 1
         },
     },
     {

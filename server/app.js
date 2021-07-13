@@ -15,4 +15,7 @@ app.on('error', (err, ctx) => {
 
 asp.debug('app start by', process.env.NODE_ENV)
 
+// iLab全局TOKEN变量
+global.ILABTOEKN = {}
+
 module.exports = app

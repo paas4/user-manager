@@ -8,6 +8,7 @@ const public = [
     /^\/check$/,
     /^\/login$/,
     /^\/register$/,
+    /^\/remoteLogin$/,
     /^\/g\/refreshToken$/,
 ]
 

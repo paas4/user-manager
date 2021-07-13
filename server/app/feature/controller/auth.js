@@ -5,6 +5,7 @@ const User = require('./user')
 const api = require('~/config/api')
 const assert = require('~/lib/assert')
 const ShareError = require('~/lib/shareError')
+const lab = require('~/service/ilab')
 
 class Auth {
 
@@ -24,6 +25,33 @@ class Auth {
         return this.token(user)
     }
 
+    async remoteLogin(ticket) {
+        const data = await lab.getToken(ticket)
+
+        // console.log('ilab data', data)
+
+        if (data.code !== 0) {
+            throw new ShareError(403110, data.msg)
+        }
+
+        if (!data.un) {
+            throw new ShareError(403111, 'un字段为空')
+        }
+
+        let user = await User.findOne({ un: data.un })
+
+        if (!user) {
+            user = await User.create({ un: data.un, name: data.dis })
+        }
+
+        // 存储iLab的Token
+        ILABTOEKN[user.id] = data.access_token
+
+        // console.log('remoteLogin', user, ILABTOEKN)
+
+        return this.token(user)
+    }
+
     // 微信登录code
     // 使用code向微信请求 openid
     async getWechatUser(code) {
@@ -34,6 +62,7 @@ class Auth {
     token(user) {
         return {
             id: user.id,
+            un: user.un,
             admin: user.admin,
             token: jwt.sign({ id: user.id }, api.secret, {
                 expiresIn: api.timeout

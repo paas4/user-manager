@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@4a/asp": "^0.1.1",
+    "@4a/assert": "^0.1.1",
     "@koa/multer": "^3.0.0",
     "app-root-dir": "^1.0.2",
     "axios": "^0.19.2",

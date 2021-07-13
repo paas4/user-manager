@@ -12,6 +12,7 @@ class Lab {
             url: '/open/api/v2/token',
             params: Lab.addSign(ticket),
         })
+        .then(res => res.data)
     }
 
     // http://www.ilab-x.com/open/api/v2/data_upload?access_token=ACCESS_TOKEN
@@ -23,6 +24,7 @@ class Lab {
             params: { access_token: token },
             data,
         })
+        .then(res => res.data)
     }
 
     static sign(ticket) {

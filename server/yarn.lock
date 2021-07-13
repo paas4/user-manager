@@ -9,6 +9,18 @@
   dependencies:
     colors "^1.4.0"
 
+"@4a/assert@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.nlark.com/@4a/assert/download/@4a/assert-0.1.1.tgz#088d0161b813d220e60af7559dca7f1c11eb4f51"
+  integrity sha1-CI0BYbgT0iDmCvdVncp/HBHrT1E=
+  dependencies:
+    "@4a/share-error" "^0.1.0"
+
+"@4a/share-error@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.nlark.com/@4a/share-error/download/@4a/share-error-0.1.0.tgz#bfdac197084f0ce919787d37208863cbe0f8270e"
+  integrity sha1-v9rBlwhPDOkZeH03IIhjy+D4Jw4=
+
 "@koa/multer@^3.0.0":
   version "3.0.0"
   resolved "https://registry.nlark.com/@koa/multer/download/@koa/multer-3.0.0.tgz#439777949f28097d7b329c0b4ce3048074c862f8"

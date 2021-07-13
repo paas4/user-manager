@@ -24,6 +24,13 @@ class HomeResolver extends Resolver {
         }
         return Auth.register({ username, password, name, stuid })
     }
+
+    remoteLogin({ ticket }) {
+        if (!ticket) {
+            throw new ShareError(403403, '缺少Ticket')
+        }
+        return Auth.remoteLogin(ticket)
+    }
 }
 
 module.exports = new HomeResolver

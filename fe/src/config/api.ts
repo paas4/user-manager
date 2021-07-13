@@ -1,5 +1,4 @@
 const api = {
-
     login(data: any) {
         return {
             url: '/login',
@@ -14,7 +13,16 @@ const api = {
             data,
             method: 'POST',
         }
-    }
+    },
+
+    // iLab登录
+    remoteLogin(params: any) {
+        return {
+            params,
+            method: 'GET',
+            url: '/remoteLogin',
+        }
+    },
 }
 
 export default api

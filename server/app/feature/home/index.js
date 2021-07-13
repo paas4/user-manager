@@ -21,4 +21,9 @@ append(router, resolver, {
     post_register(ctx) {
         return ctx.request.body
     },
+
+    // iLab登录
+    get_remoteLogin(ctx) {
+        return ctx.query
+    }
 })
