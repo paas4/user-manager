@@ -1,6 +1,7 @@
 const sid = require('shortid')
 const db = require(':db').mysql
 const SequelizeApp = require('./sequelize')
+const uuid = require('uuid')
 
 class Lab extends SequelizeApp {
     constructor() {
@@ -9,7 +10,8 @@ class Lab extends SequelizeApp {
 
     create(lab) {
         return super.create({
-            sid: sid(),
+            // sid: sid(),
+            sid: uuid.v4().replace(/-/g, ''),
             ...lab,
         })
     }

@@ -17,7 +17,7 @@ export default defineComponent({
     components: { LoginRegister },
 
     created() {
-        this.ticketLogin()
+        this.checkLogin()
     },
 
     methods: {
@@ -25,20 +25,31 @@ export default defineComponent({
             location.href = `${baseURL}/lab.html`
         },
 
-        ticketLogin() {
+        checkLogin() {
+
+            // 检查是否已登录
+            if (auth.isLogin()) {
+                return this.gotoLab()
+            }
+
+            // 检查是否启用iLab自动登录
             if (this.$route.query.ticket) {
-                auth.remoteLogin(this.$route.query.ticket as string)
-                    .then((res: Response) => {
-                        if (res.code === 0) {
-                            return this.gotoLab()
-                        }
-                        alert('iLab登录失败:' + res.message)
-                    })
-                    .catch((err: Error) => {
-                        alert('iLab登录失败:' + err.message)
-                    })
+                return this.iLabLogin()
             }
         },
+
+        iLabLogin() {
+            auth.remoteLogin(this.$route.query.ticket as string)
+                .then((res: Response) => {
+                    if (res.code === 0) {
+                        return this.gotoLab()
+                    }
+                    alert('iLab登录失败:' + res.message)
+                })
+                .catch((err: Error) => {
+                    alert('iLab登录失败:' + err.message)
+                })
+        }
     },
 
     computed: {

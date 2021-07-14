@@ -13,6 +13,8 @@ class LabResolver extends Resolver {
 
         asp.debug('lab:', params)
 
+        timeValidator(params)
+
         const data = await Lab.create({
             uid: ctx.state.user.id,
             title: params.title,
@@ -38,15 +40,65 @@ class LabResolver extends Resolver {
         // 上传到iLab平台
         const result = await lab.dataUpload(iToken, labData)
 
+        asp.warn('ilabUploadResult:', result)
+
         // 校验上传结果
         assert.ok(result.code === 0, 403300, 'iLab上传失败: ' + JSON.stringify(result))
-
-        result.code === 0 ?
-            asp.info('ilabUploadResult:', result):
-            asp.error('ilabUploadResult:', result)
 
         return data
     }
 }
 
 module.exports = new LabResolver
+
+
+
+// 实验时间戳合法性校验
+function timeValidator(lab) {
+    const result = []
+
+    console.group('实验数据时间戳校验开始:-------------------------------------')
+
+    const r0 = lab.steps[0].startTime > lab.startTime
+
+    r0 ?
+        asp.debug('step0.startTime > lab.startTime:', r0):
+        asp.error('step0.startTime > lab.startTime:', r0)
+
+    result.push(r0)
+
+    lab.steps.forEach((step, index) => {
+
+        const rn = step.endTime > step.startTime
+
+        rn ?
+            asp.debug(`step${index}.endTime > step${index}.startTime:`, rn) :
+            asp.error(`step${index}.endTime > step${index}.startTime:`, rn)
+
+
+        result.push(rn)
+
+        if (index != 0) {
+            const r1 = step.startTime > lab.steps[index - 1].endTime
+
+            r1 ?
+                asp.debug(`step${index}.startTime > step${index-1}.endTime:`, r1) :
+                asp.error(`step${index}.startTime > step${index-1}.endTime:`, r1)
+
+            result.push(r1)
+        }
+    })
+
+    const rl = lab.endTime > lab.steps[lab.steps.length - 1].endTime
+
+    rl ?
+        asp.debug(`lab.endTime > step${lab.steps.length - 1}.endTime:`, rl) :
+        asp.error(`lab.endTime > step${lab.steps.length - 1}.endTime:`, rl)
+
+    result.push(rl)
+
+    asp.debug('lab time valid result:', result)
+
+    console.groupEnd()
+    asp.info('实验数据时间戳校验结束-------------------------------------')
+}
