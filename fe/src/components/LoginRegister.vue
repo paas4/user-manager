@@ -7,7 +7,7 @@
             .form-item
                 input.input(v-model="login.username", type="text", placeholder="用户名")
             .form-item
-                input.input(v-model="login.password", type="password", placeholder="密码", autocomplete)
+                input.input(v-model="login.password", type="password", placeholder="密码")
             .form-item
                 .tips {{loginMessage.message}}
             .btn-group
@@ -19,9 +19,9 @@
             .form-item
                 input.input(v-model="register.username", type="text", placeholder="用户名")
             .form-item
-                input.input(v-model="register.password", type="password", placeholder="请输入密码", autocomplete)
+                input.input(v-model="register.password", type="password", placeholder="请输入密码")
             .form-item
-                input.input(v-model="register.repeatPassword", type="password", placeholder="请确认密码", autocomplete)
+                input.input(v-model="register.repeatPassword", type="password", placeholder="请确认密码")
             .form-item
                 input.input(v-model="register.stuid", type="text", placeholder="请输入学号")
             .form-item

@@ -5,19 +5,20 @@ import Login from '@/pages/Login.vue'
 const routes = [
     {
         path: '/',
-        redirect: '/login'
+        redirect: '/login',
     },
     {
-        path: '/login',
         name: 'login',
+        path: '/login',
+        alias: '/login.html',
         component: Login,
-        meta: { status: 0 }
+        meta: { status: 0 },
     },
     {
         path: '/register',
         name: 'register',
         component: Login,
-        meta: { status: 1 }
+        meta: { status: 1 },
     },
     {
         path: '/user',

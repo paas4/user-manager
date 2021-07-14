@@ -53,8 +53,8 @@ export default defineComponent({
     },
 
     computed: {
-        status() {
-            return this.$route.meta.status
+        status(): number {
+            return Number(this.$route.meta.status) || 0
         }
     }
 })

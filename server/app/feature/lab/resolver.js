@@ -90,12 +90,16 @@ function timeValidator(lab) {
     })
 
     const rl = lab.endTime > lab.steps[lab.steps.length - 1].endTime
-
     rl ?
         asp.debug(`lab.endTime > step${lab.steps.length - 1}.endTime:`, rl) :
         asp.error(`lab.endTime > step${lab.steps.length - 1}.endTime:`, rl)
-
     result.push(rl)
+
+    const ro = Date.now() > lab.endTime
+    ro ?
+        asp.debug(`Date.now() > lab.endTime:`, Date.now() > lab.endTime, Date.now(), lab.endTime):
+        asp.error(`Date.now() > lab.endTime:`, Date.now() > lab.endTime, Date.now(), lab.endTime)
+    result.push(ro)
 
     asp.debug('lab time valid result:', result)
 
