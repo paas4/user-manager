@@ -8,6 +8,7 @@
 </template>
 <script lang="ts">
 import auth from '@/base/auth'
+import store from 'store2'
 import { baseURL } from '@/config/host'
 import { defineComponent } from 'vue'
 import LoginRegister from '@/components/LoginRegister.vue'
@@ -22,7 +23,8 @@ export default defineComponent({
 
     methods: {
         gotoLab() {
-            location.href = `${baseURL}/lab.html`
+            // location.href = `${baseURL}/lab.html`
+            location.href = `/lab.html?token=${store.get('token')}&tokenExpiredTime=${store.get('tokenExpiredTime')}`
         },
 
         checkLogin() {
