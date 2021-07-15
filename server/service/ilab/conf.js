@@ -1,3 +1,4 @@
+const asp = require('@4a/asp')
 const appEnv = require('../../common/appEnv')
 
 const baseURL = appEnv.get({
@@ -16,7 +17,7 @@ const account = appEnv.get({
     }
 })
 
-// console.log(123, baseURL, account)
+asp.debug('iLab相关参数:', baseURL, account)
 
 module.exports = {
     baseURL,

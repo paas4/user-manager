@@ -1,5 +1,6 @@
 // 登录关系
 const md5 = require('md5')
+const asp = require('@4a/asp')
 const jwt = require('jsonwebtoken')
 const User = require('./user')
 const api = require('~/config/api')
@@ -28,7 +29,7 @@ class Auth {
     async remoteLogin(ticket) {
         const data = await lab.getToken(ticket)
 
-        // console.log('ilab data', data)
+        asp.debug('iLab login--:', data)
 
         if (data.code !== 0) {
             throw new ShareError(403110, data.msg)
@@ -47,7 +48,7 @@ class Auth {
         // 存储iLab的Token
         ILABTOEKN[user.id] = data.access_token
 
-        // console.log('remoteLogin', user, ILABTOEKN)
+        asp.debug('remoteLogin:', user)
 
         return this.token(user)
     }

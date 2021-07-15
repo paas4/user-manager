@@ -30,12 +30,16 @@ class LabResolver extends Resolver {
         // 创建实验数据
         const labData = LabModel.init(data, user)
 
-        // asp.debug('lab data:', user, data)
-        asp.debug('model:', labData)
+        asp.debug('labData:', labData)
 
         const iToken = ILABTOEKN[user.id]
 
-        console.log('itoken', iToken)
+        iToken ?
+            asp.info('lab.dataUpload token:', iToken):
+            asp.error('lab.dataUpload token Error:', iToken)
+
+        // 检查token
+        assert.ok(iToken, 403301, 'loss iLab token')
 
         // 上传到iLab平台
         const result = await lab.dataUpload(iToken, labData)

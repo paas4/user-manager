@@ -1,4 +1,5 @@
 const md5 = require('md5')
+const asp = require('@4a/asp')
 const axios = require('axios')
 const { baseURL, account } = require('./conf')
 
@@ -6,6 +7,7 @@ class Lab {
 
     // http://www.ilab-x.com/open/api/v2/token?ticket=TICKET&appid=APPID&signature=SIGNATURE
     async getToken(ticket) {
+        asp.debug('iLab.getToken相关参数:', baseURL, account)
         return axios({
             baseURL,
             method: 'GET',
@@ -17,6 +19,7 @@ class Lab {
 
     // http://www.ilab-x.com/open/api/v2/data_upload?access_token=ACCESS_TOKEN
     async dataUpload(token, data) {
+        asp.debug('iLab.dataUpload相关参数:', baseURL, account)
         return axios({
             baseURL,
             method: 'POST',

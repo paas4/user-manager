@@ -9,7 +9,6 @@
 <script lang="ts">
 import auth from '@/base/auth'
 import store from 'store2'
-import { baseURL } from '@/config/host'
 import { defineComponent } from 'vue'
 import LoginRegister from '@/components/LoginRegister.vue'
 
