@@ -14,7 +14,7 @@
     "@4a/assert": "^0.1.1",
     "@koa/multer": "^3.0.0",
     "app-root-dir": "^1.0.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "best-require": "^1.1.4",
     "colors": "^1.4.0",
     "debug": "^4.1.1",
